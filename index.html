@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>HTML 3D Cyclic Carousel</title>
+    <meta name="author" content="">
+    <link rel="stylesheet" href="cycliccarousel.css">
+    <script src="cycliccarousel.js"></script>
+    <style>
+      .panels-container {
+        margin-bottom: 128px;
+        margin-top: 128px;
+        width: 512px;
+      }
+      .panel {
+        height: 768px;
+        width: 512px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="carousel" class="cyclic-carousel">
+      <div class="panels-container">
+        <div class="panel">
+          <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Piano.jpg" alt="Piano">
+          <h1>John Smith</h1>
+          <p><strong>Email: </strong><br>john.smith@microsoft.com</p>
+          <p><strong>Biography: </strong><br>My name is John Smith. This is a carousel application.</p>
+        </div>
+        <div class="panel">
+          <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Autobahn.jpg" alt="Autobahn">
+          <h1>Jenna Sanders</h1>
+          <p><strong>Email: </strong><br>jens123@gmail.com</p>
+          <p><strong>Biography: </strong><br>This is the second panel of carousel, and I'm Jenna.</p>
+        </div>
+        <div class="panel">
+          <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Bridge.jpg" alt="Bridge">
+          <h1>Jim Simpson</h1>
+          <p><strong>Email: </strong><br>gym_simple_son@jsimpson.com</p>
+          <p><strong>Biography: </strong><br>Name's Jim, so call me that, and third panel btw.</p>
+        </div>
+        <div class="panel">
+          <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Night.jpg" alt="Night">
+          <h1>Jones Simpson</h1>
+          <p><strong>Email: </strong><br>jones_s_70@gmail.com</p>
+          <p><strong>Biography: </strong><br>Not related to Jim. Fourth panel.</p>
+        </div>
+        <div class="panel">
+          <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Rail.jpg" alt="Rail">
+          <h1>Java Script</h1>
+          <p><strong>Email: </strong><br>jsjsjs@javascript.org</p>
+          <p><strong>Biography: </strong><br>I am not related to JavaScript at all. 5th.</p>
+        </div>
+        <div class="panel">
+          <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/River.jpg" alt="River">
+          <h1>Jacob Sabra</h1>
+          <p><strong>Email: </strong><br>Email: jacob_the_bear@hotmail.com</p>
+          <p><strong>Biography: </strong><br>Roooooooooooaaaaaaaaaa6thaaaaaaarrrrrrrrrrrrrr!!!!!!!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+    </div>
+    <script>
+    var cyclicCarousel = new CyclicCarousel(
+        document.getElementById('carousel'),
+        { startIndex: 1, arrowKeys: true, draggable: true, timeout: 1000 }
+        );
+    </script>
+  </body>
+</html>

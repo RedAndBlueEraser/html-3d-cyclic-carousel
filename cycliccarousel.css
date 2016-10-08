@@ -1,0 +1,34 @@
+/*
+ * cycliccarousel.css
+ * Version 20161007
+ * Written by Harry Wong (RedAndBlueEraser)
+ */
+
+.cyclic-carousel > .panels-container {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.cyclic-carousel > .panels-container > .panel:not(:first-child) {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.cyclic-carousel {
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.cyclic-carousel > .panels-container, .cyclic-carousel > .panels-container > .panel {
+    -webkit-transition: 1000ms;
+    -moz-transition: 1000ms;
+    -o-transition: 1000ms;
+    transition: 1000ms;
+}
