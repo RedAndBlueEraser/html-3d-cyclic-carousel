@@ -120,10 +120,10 @@ function CyclicCarousel(element, options) {
     /* Set intervals to scroll the carousel periodically. */
     if (options && options.timeout) {
         (function (cyclicCarousel) {
-            var isMouseOver = false;
+            var isMouseOver = false, isMouseDown = false;
 
             setInterval(function () {
-                if (!document.hidden && !isMouseOver) {
+                if (!document.hidden && !isMouseOver && !isMouseDown) {
                     cyclicCarousel.scrollToNext();
                 }
             }, options.timeout);
@@ -131,6 +131,8 @@ function CyclicCarousel(element, options) {
             /* Mouse entered or left carousel. */
             element.addEventListener('mouseenter', function (event) { isMouseOver = true; });
             element.addEventListener('mouseleave', function (event) { isMouseOver = false; });
+            element.addEventListener('mousedown', function (event) { isMouseDown = true; });
+            document.addEventListener('mouseup', function (event) { isMouseDown = false; });
         })(this);
     }
 
