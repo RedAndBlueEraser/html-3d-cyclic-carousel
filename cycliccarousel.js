@@ -207,10 +207,10 @@ CyclicCarousel.prototype.addPanel = function (panelOrIndex, panel) {
 
 /**
  * Removes the panel at the end of the carousel.
- *
+ *//**
  * Removes the panel at the specified position in the carousel. Shifts any subsequent panels to the left (subtracts one from their indices).
  * @param {number} index The position of the panel to be removed.
- *
+ *//**
  * Removes the specified panel from the carousel.
  * @param {HTMLElement} panel The panel to remove.
  */
@@ -230,41 +230,47 @@ CyclicCarousel.prototype.removePanel = function (indexOrPanel) {
     }
 };
 
-// TODO:.
+/**
+ * Orientates and transforms the panels container.
+ */
 CyclicCarousel.prototype.orientatePanelsContainer = function () {
     var pCStyle = this.panelsContainer.style;
     pCStyle.msTransform = pCStyle.webkitTransform = pCStyle.MozTransform = pCStyle.OTransform = pCStyle.transform =
         "translateZ(" + (-1 * this.panelTranslateZ) + "px) rotateY(" + (-1 * this.currentRotateY) + "deg)";
 };
 
-// TODO:.
-CyclicCarousel.prototype.orientatePanels = function () {
+/**
+ * Orientates and transforms the carousel.
+ */
+CyclicCarousel.prototype.orientate = function () {
     for (var i = 0; i < this.panels.length; i++) {
         var pStyle = this.panels[i].style;
         pStyle.msTransform = pStyle.webkitTransform = pStyle.MozTransform = pStyle.OTransform = pStyle.transform =
             "rotateY(" + (i * this.panelRotateY) + "deg) translateZ(" + this.panelTranslateZ + "px)";
     }
-};
-
-// TODO:.
-CyclicCarousel.prototype.orientate = function () {
-    this.orientatePanels();
     this.orientatePanelsContainer();
 };
 
-// TODO:.
+/**
+ * Scrolls the carousel to show the next panel.
+ */
 CyclicCarousel.prototype.scrollToNext = function () {
     this.currentIndex++;
     this.orientatePanelsContainer();
 };
 
-// TODO:.
+/**
+ * Scrolls the carousel to show the previous panel.
+ */
 CyclicCarousel.prototype.scrollToPrevious = function () {
     this.currentIndex--;
     this.orientatePanelsContainer();
 };
 
-// TODO:.
+/**
+ * Scrolls the carousel to show the panel at the specified position.
+ * @param {number} index The position of the panel to be shown.
+ */
 CyclicCarousel.prototype.scrollTo = function (index) {
     this.currentIndex = index;
     this.orientatePanelsContainer();
