@@ -86,24 +86,33 @@ function CyclicCarousel(element, options) {
                 pCStyle.webkitTransition = pCStyle.MozTransition = pCStyle.OTransition = null;
             };
 
+            var isDrag = false, startMousePositionX, panelWidth;
             /* Mouse button pressed on carousel. */
             element.addEventListener('mousedown', function (event) {
-                event.preventDefault();
+                event.preventDefault();  // Prevent dragging ghost images.
+                isDrag = true;
                 setCursor('grabbing');
                 stopTransition();
-                // TODO:.
+                startMousePositionX = event.clientX;
+                panelWidth = cyclicCarousel.panelWidth;
             });
 
             /* Mouse moved. */
-            addEventListener('mousemove', function (event) {
-                // TODO:.
+            document.addEventListener('mousemove', function (event) {
+                if (isDrag) {
+                    var endMousePositionX = event.clientX,
+                        deltaIndex = (endMousePositionX - startMousePositionX) / panelWidth;
+                    startMousePositionX = endMousePositionX;
+                    cyclicCarousel.scrollTo(cyclicCarousel.currentIndex - deltaIndex);
+                }
             });
 
             /* Mouse button released. */
-            addEventListener('mouseup', function (event) {
+            document.addEventListener('mouseup', function (event) {
+                isDrag = false;
                 setCursor('grab');
                 startTransition();
-                // TODO:.
+                cyclicCarousel.scrollTo(Math.round(cyclicCarousel.currentIndex));
             });
         })(this);
     }
