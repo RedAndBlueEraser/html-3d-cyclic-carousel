@@ -113,11 +113,11 @@ function CyclicCarousel(element, options) {
         (function (cyclicCarousel) {
             var isMouseOver = false;
 
-            setInterval(options.timeout, function () {
+            setInterval(function () {
                 if (!document.hidden && !isMouseOver) {
                     cyclicCarousel.scrollToNext();
                 }
-            });
+            }, options.timeout);
 
             /* Mouse entered or left carousel. */
             element.addEventListener('mouseenter', function (event) { isMouseOver = true; });
