@@ -127,21 +127,7 @@ function CyclicCarousel(element, options) {
     this.intervalID = null;
     /* Set intervals to scroll the carousel periodically. */
     if (options && options.timeout) {
-        (function (cyclicCarousel) {
-            var isMouseOver = false, isMouseDown = false;
-
-            cyclicCarousel.intervalID = setInterval(function () {
-                if (!document.hidden && !isMouseOver && !isMouseDown) {
-                    cyclicCarousel.scrollToNext();
-                }
-            }, options.timeout);
-
-            /* Mouse entered or left carousel. */
-            element.addEventListener('mouseenter', function (event) { isMouseOver = true; });
-            element.addEventListener('mouseleave', function (event) { isMouseOver = false; });
-            element.addEventListener('mousedown', function (event) { isMouseDown = true; });
-            document.addEventListener('mouseup', function (event) { isMouseDown = false; });
-        })(this);
+        this.setTimeout(options.timeout);
     }
 
     this.orientate();
@@ -294,3 +280,49 @@ CyclicCarousel.prototype.scrollTo = function (index) {
     this.currentIndex = index;
     this.orientatePanelsContainer();
 };
+
+(function () {
+    var isMouseOver = false, isMouseDown = false,
+        setIsMouseOverToTrueEL = function (event) { isMouseOver = true; },
+        setIsMouseOverToFalseEL = function (event) { isMouseOver = false; },
+        setIsMouseDownToTrueEL = function (event) { isMouseDown = true; },
+        setIsMouseDownToFalseEL = function (event) { isMouseDown = false; };
+
+    /**
+     * Set an interval to automatically scroll the carousel.
+     * @param {number} timeout The time interval, in milliseconds, to automatically scroll the carousel.
+     */
+    CyclicCarousel.prototype.setTimeout = function (timeout) {
+        /* Clear interval if it already exists. */
+        if (this.intervalID) {
+            this.clearTimeout();
+        }
+
+        /* Create a new interval. */
+        this.intervalID = setInterval(function (cyclicCarousel) {
+            if (!document.hidden && !isMouseOver && !isMouseDown) {
+                cyclicCarousel.scrollToNext();
+            }
+        }, timeout, this);
+
+        /* Pause auto scrolling if hovering over or dragging on the carousel. */
+        this.element.addEventListener('mouseenter', setIsMouseOverToTrueEL);
+        this.element.addEventListener('mouseleave', setIsMouseOverToFalseEL);
+        this.element.addEventListener('mousedown', setIsMouseDownToTrueEL);
+        document.addEventListener('mouseup', setIsMouseDownToFalseEL);
+    };
+
+    /**
+     * Clear the interval to stop automatically scrolling the carousel.
+     */
+    CyclicCarousel.prototype.clearTimeout = function () {
+        clearInterval(this.intervalID);
+        this.intervalID = null;
+
+        /* Remove unused event listeners. */
+        this.element.removeEventListener('mouseenter', setIsMouseOverToTrueEL);
+        this.element.removeEventListener('mouseleave', setIsMouseOverToFalseEL);
+        this.element.removeEventListener('mousedown', setIsMouseDownToTrueEL);
+        document.removeEventListener('mouseup', setIsMouseDownToFalseEL);
+    };
+})();
