@@ -7,63 +7,149 @@
     <link rel="stylesheet" href="cycliccarousel.css">
     <script src="cycliccarousel.js"></script>
     <style>
-      .panels-container {
-        margin-bottom: 128px;
-        margin-top: 128px;
-        width: 512px;
-      }
+      body { font-family: Arial, Helvetica, sans-serif; }
+      .panels-container { margin-bottom: 16px; margin-top: 16px; }  /* Gap between carousel and top. */
       .panel {
-        height: 768px;
-        width: 512px;
+        background: rgba(50, 100, 150, 0.5);
+        margin-left: 16px; margin-right: 16px;                      /* Gap between panels. */
+        padding: 16px;                                              /* Padding is needed when there is gap between panels. */
+        width: 512px;                                               /* Width of panels. Must be specified and a fixed value. */
+      }
+
+      .buttons-container {
+        background: rgba(100, 100, 100, 0.5);
+        border-radius: 20px;
+        display: inline-block;
+        padding: 10px;
+      }
+      .button {
+        background: #6666BB;
+        border-radius: 10px;
+        color: #FFFFFF;
+        display: inline-block;
+        font-family: "Courier New", Courier, monospace;
+        font-weight: bold;
+        height: 20px;
+        line-height: 20px;
+        text-decoration: none;
+        width: 20px;
       }
     </style>
+    <!-- Bugs.
+    .panel doesn't wrap elements unless given padding.
+    Doesn't work with IEs.
+    Text align.
+    -->
   </head>
   <body>
     <div id="carousel" class="cyclic-carousel">
       <div class="panels-container">
         <div class="panel">
           <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Piano.jpg" alt="Piano">
-          <h1>John Smith</h1>
-          <p><strong>Email: </strong><br>john.smith@microsoft.com</p>
-          <p><strong>Biography: </strong><br>My name is John Smith. This is a carousel application.</p>
+          <h1>Piano</h1><p>Piano</p>
         </div>
         <div class="panel">
           <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Autobahn.jpg" alt="Autobahn">
-          <h1>Jenna Sanders</h1>
-          <p><strong>Email: </strong><br>jens123@gmail.com</p>
-          <p><strong>Biography: </strong><br>This is the second panel of carousel, and I'm Jenna.</p>
+          <h1>Autobahn</h1><p>Autobahn</p>
         </div>
         <div class="panel">
           <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Bridge.jpg" alt="Bridge">
-          <h1>Jim Simpson</h1>
-          <p><strong>Email: </strong><br>gym_simple_son@jsimpson.com</p>
-          <p><strong>Biography: </strong><br>Name's Jim, so call me that, and third panel btw.</p>
+          <h1>Bridge</h1><p>Bridge</p>
         </div>
         <div class="panel">
           <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Night.jpg" alt="Night">
-          <h1>Jones Simpson</h1>
-          <p><strong>Email: </strong><br>jones_s_70@gmail.com</p>
-          <p><strong>Biography: </strong><br>Not related to Jim. Fourth panel.</p>
+          <h1>Night</h1><p>Night</p>
         </div>
         <div class="panel">
           <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Rail.jpg" alt="Rail">
-          <h1>Java Script</h1>
-          <p><strong>Email: </strong><br>jsjsjs@javascript.org</p>
-          <p><strong>Biography: </strong><br>I am not related to JavaScript at all. 5th.</p>
+          <h1>Rail</h1><p>Rail</p>
         </div>
         <div class="panel">
           <img src="https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/River.jpg" alt="River">
-          <h1>Jacob Sabra</h1>
-          <p><strong>Email: </strong><br>Email: jacob_the_bear@hotmail.com</p>
-          <p><strong>Biography: </strong><br>Roooooooooooaaaaaaaaaa6thaaaaaaarrrrrrrrrrrrrr!!!!!!!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <h1>River</h1><p>River</p>
         </div>
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <div class="buttons-container">
+        <a id="previous" class="button" href="#" title="Previous">&lt;</a>
+        <div id="numbers" style="display: inline-block;"></div>
+        <a id="next" class="button" href="#" title="Next">&gt;</a>
+        <a id="add" class="button" href="#" title="Add">+</a>
+        <a id="remove" class="button" href="#" title="Remove">-</a>
       </div>
     </div>
     <script>
     var cyclicCarousel = new CyclicCarousel(
         document.getElementById('carousel'),
-        { startIndex: 1, arrowKeys: true, draggable: true, timeout: 1000 }
+        { startIndex: 1, arrowKeys: true, draggable: true, timeout: 2000 }
         );
+    cyclicCarousel.panelTemplate = document.createElement('div');
+    cyclicCarousel.panelTemplate.className = 'panel';
+    cyclicCarousel.panelTemplate.appendChild(document.createElement('img'));
+    cyclicCarousel.panelTemplate.appendChild(document.createElement('h1'));
+    cyclicCarousel.panelTemplate.appendChild(document.createElement('p'));
+
+    document.getElementById('previous').addEventListener('click', function (event) {
+        cyclicCarousel.scrollToPrevious();
+        event.preventDefault();
+    });
+    document.getElementById('next').addEventListener('click', function (event) {
+        cyclicCarousel.scrollToNext();
+        event.preventDefault();
+    });
+    document.getElementById('add').addEventListener('click', function (event) {
+        var imgSrcs = [
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Autobahn.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Bridge.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/City.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Cloud.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Fighter Jet.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Monorail.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Mountains.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Night.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Paddy Field.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Piano.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Power Station.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Rail.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/River.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Sports Car.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Supercomputer.jpg',
+                'https://dl.dropboxusercontent.com/u/73445707/Sample%20Photos/Small/Train.jpg'
+            ],
+            imgAlts = [
+                'Autobahn', 'Bridge', 'City', 'Cloud', 'Fighter Jet',
+                'Monorail', 'Mountains', 'Night', 'Paddy Field', 'Piano',
+                'Power Station', 'Rail', 'River', 'Sports Car',
+                'Supercomputer', 'Train'
+            ],
+            panel = cyclicCarousel.panelTemplate.cloneNode(true),
+            imgI = Math.floor(Math.random() * imgSrcs.length);
+        panel.getElementsByTagName('img')[0].alt = imgAlts[imgI];
+        panel.getElementsByTagName('img')[0].src = imgSrcs[imgI];
+        panel.getElementsByTagName('h1')[0].appendChild(document.createTextNode(imgAlts[imgI]));
+        panel.getElementsByTagName('p')[0].appendChild(document.createTextNode(imgAlts[imgI]));
+        cyclicCarousel.addPanel(panel);
+        event.preventDefault();
+    });
+    document.getElementById('remove').addEventListener('click', function (event) {
+        cyclicCarousel.removePanel();
+        event.preventDefault();
+    });
+    var numbers = document.getElementById('numbers');
+    for (var i = 0; i < cyclicCarousel.panels.length; i++) {
+        var link = document.createElement('a');
+        link.className = 'button';
+        link.textContent = 'O';
+        link.href = '#';
+        link.title = i + 1;
+        link.addEventListener('click', (function (i) { return function (event) {
+            cyclicCarousel.scrollTo(i);
+            event.preventDefault();
+        }})(i));
+        numbers.appendChild(link);
+        numbers.appendChild(document.createTextNode(' '));
+    }
     </script>
   </body>
 </html>
