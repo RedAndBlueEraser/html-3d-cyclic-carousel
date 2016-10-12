@@ -117,12 +117,20 @@ function CyclicCarousel(element, options) {
         })(this);
     }
 
+    /**
+     * The interval ID of the interval to scroll the carousel periodically.
+     * @type {number}
+     * @default null
+     * @public
+     * @readonly
+     */
+    this.intervalID = null;
     /* Set intervals to scroll the carousel periodically. */
     if (options && options.timeout) {
         (function (cyclicCarousel) {
             var isMouseOver = false, isMouseDown = false;
 
-            setInterval(function () {
+            cyclicCarousel.intervalID = setInterval(function () {
                 if (!document.hidden && !isMouseOver && !isMouseDown) {
                     cyclicCarousel.scrollToNext();
                 }
