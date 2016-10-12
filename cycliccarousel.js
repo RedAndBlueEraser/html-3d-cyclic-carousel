@@ -207,7 +207,7 @@ Object.defineProperty(CyclicCarousel.prototype, 'currentRotateY',
 /**
  * Appends the specified panel to the end of the carousel.
  * @param {HTMLElement} panel The panel to append.
- *
+ *//**
  * Inserts the specified panel at the specified position in the carousel.
  * @param {number} index The position at which the panel is to be inserted.
  * @param {HTMLElement} panel The panel to insert.
