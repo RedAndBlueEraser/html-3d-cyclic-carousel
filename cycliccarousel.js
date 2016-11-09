@@ -177,7 +177,7 @@ Object.defineProperty(CyclicCarousel.prototype, 'panelRotateY',
  * @readonly
  */
 Object.defineProperty(CyclicCarousel.prototype, 'panelTranslateZ',
-    { get: function () { return this.panelWidth / 2 / Math.tan(Math.PI / this.panels.length); } });
+    { get: function () { return this.panelWidth / 2 / Math.tan(Math.PI / Math.max(3, this.panels.length)); } });
 
 /**
  * The Y rotation, in degrees, of the panels container.
