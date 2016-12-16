@@ -170,6 +170,19 @@ Change the perspective (distance) from where the carousel is viewed.
 }
 ```
 
+#### Scroll speed
+
+Change the speed of scrolling the carousel.
+
+```CSS
+.cyclic-carousel > .panels-container, .cyclic-carousel > .panels-container > .panel {
+    -webkit-transition: 1000ms;
+    -moz-transition: 1000ms;
+    -o-transition: 1000ms;
+    transition: 1000ms;
+}
+```
+
 #### Space above and below the carousel
 
 Add space before and after the carousel. If you add margins to `.cyclic-carousel` instead, you would find that the panels are still hidden if they overlap the the `.panels-container` boundaries.
