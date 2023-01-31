@@ -222,4 +222,4 @@ Sometimes the first panel might not have its contents wrapped. In this case, add
 
 ## Author
 
-Harry Wong (RedAndBlueEraser)
+RedAndBlueEraser
